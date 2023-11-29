@@ -6,6 +6,8 @@ import AdminLayout from '../layouts/AdminLayouts';
 import SignIn from '../pages/signin/SignIn';
 import Students from '../pages/student/Students';
 import Payment from '../pages/payment/Payment';
+import Course from '../pages/course/Course';
+import Dashboard from '../pages/dashboard/Dashboard';
 
 export const AppRoutes = () => {
   return (
@@ -29,8 +31,8 @@ export const AppRoutes = () => {
         }
       >
         <Route path="*" element={<UnderConstruction />} />
-        <Route path="course" element={<UnderConstruction />} />
-        <Route path="dashboard" element={<UnderConstruction />} />
+        <Route path="course" element={<Course />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="students" element={<Students />} />
         <Route path="payment" element={<Payment />} />
         <Route path="report" element={<UnderConstruction />} />

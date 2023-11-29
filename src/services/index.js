@@ -31,3 +31,5 @@ services.interceptors.response.use(async response => {
 export { default as useAuth } from './useAuth';
 export { default as useStudent } from './useStudent';
 export { default as usePayment } from './usePayment';
+export { default as useCourse } from './useCourse';
+export { default as useStatistics } from './useStatistics';

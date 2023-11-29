@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   TableContainer,
   Box,
@@ -15,13 +14,13 @@ import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
 import { useCustomToast } from '../../utils';
-import { usePayment } from '../../services';
+import { useCourse } from '../../services';
 import { BiShow } from 'react-icons/bi';
-import dayjs from 'dayjs';
-import ModalPaymentDetails from '../../components/ModalPaymentDetails';
-const Payment = () => {
+import ModalCourseDetails from '../../components/ModalCourseDetail';
+
+const Course = () => {
   const [searchParams] = useSearchParams();
-  const { paymentList } = usePayment();
+  const { courseList } = useCourse();
   const [data, setData] = useState([]);
   const [links, setLinks] = useState([]);
   const [showDetail, setShowDetail] = useState(false);
@@ -34,7 +33,7 @@ const Payment = () => {
 
   const getListData = async (page, q) => {
     try {
-      const res = await paymentList(page, q);
+      const res = await courseList(page, q);
       setData(res?.data);
       setLinks(res?.links);
     } catch (e) {
@@ -55,17 +54,17 @@ const Payment = () => {
     <Box>
       <TableContainer>
         <Text color="gray.900" fontSize="24px" fontWeight="bold">
-          Payment Details
+          Course Details
         </Text>
         <Table variant="simple">
           <Thead>
             <Tr>
               <Th>Name</Th>
-              <Th>Payment Schedule</Th>
-              <Th>Bill Number</Th>
-              <Th>Amount Paid</Th>
-              <Th>Balance Amount</Th>
-              <Th>Date of Admission</Th>
+              <Th>Languange</Th>
+              <Th>Course Duration</Th>
+              <Th>Location</Th>
+              <Th>Bootcamp Mentor</Th>
+              <Th>Mentor Email</Th>
               <Th></Th>
             </Tr>
           </Thead>
@@ -73,22 +72,22 @@ const Payment = () => {
             {data.map((item, index) => (
               <Tr bgColor="gray.50" key={`payment-item-${item.id}`}>
                 <Td fontSize="14px" color="gray.900">
-                  {item?.student.name}
+                  {item?.title}
                 </Td>
                 <Td fontSize="14px" color="gray.900">
-                  {item?.schedule}
+                  {item?.code}
                 </Td>
                 <Td fontSize="14px" color="gray.900">
-                  {item?.number}
+                  {item?.department}
                 </Td>
                 <Td fontSize="14px" color="gray.900">
-                  {item?.amount}
+                  {item?.location}
                 </Td>
                 <Td fontSize="14px" color="gray.900">
-                  {item?.balance}
+                  {item?.instructor}
                 </Td>
                 <Td fontSize="14px" color="gray.900">
-                  {dayjs(item?.student.admissionDate).format('DD MMM YYYY')}{' '}
+                  {item?.fee}
                 </Td>
                 <Td>
                   <IconButton
@@ -106,7 +105,7 @@ const Payment = () => {
         </Table>
       </TableContainer>
       <Pagination links={links} onClick={getListData} />
-      <ModalPaymentDetails
+      <ModalCourseDetails
         data={selectedData}
         isOpen={showDetail}
         onClose={handleCloseModal}
@@ -115,4 +114,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default Course;
