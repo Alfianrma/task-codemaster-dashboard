@@ -3,7 +3,7 @@ import { Button as CButton } from '@chakra-ui/react';
 const Button = ({
   text,
   bgColor = '#F94449',
-  onCLick,
+  onClick,
   isBggradient,
   variant = 'solid',
   textColor = 'white',
@@ -17,7 +17,7 @@ const Button = ({
         isBggradient ? 'linear(to-r, #F94449 37.55%, #A62D31 184.78%)' : ''
       }
       variant={variant}
-      onClick={onCLick}
+      onClick={onClick}
       size="md"
       backgroundColor={bgColor}
       color={textColor}

@@ -26,3 +26,5 @@ const Pagination = ({ links, onClick }) => {
     </Center>
   );
 };
+
+export default Pagination;

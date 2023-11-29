@@ -1,7 +1,8 @@
 import React from 'react';
-import { Image, Box, Text, Center } from '@chakra-ui/react';
+import { Image, Box, Text, Center, Card, Flex } from '@chakra-ui/react';
 import '@fontsource/montserrat';
 import '@fontsource/plus-jakarta-sans';
+import FormInput from './FormInput';
 
 function UnderConstruction() {
   return (
@@ -22,6 +23,9 @@ function UnderConstruction() {
           Under Construction
         </Text>
       </Box>
+      <Card w="620px" minH="516px" margin="auto" padding="40px">
+        <Flex direction="column" gap="16px"></Flex>
+      </Card>
     </Box>
 
     // <Center flexDirection="column" h="100vh">

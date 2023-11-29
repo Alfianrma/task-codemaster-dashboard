@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import FormInput from '../../components/FormInput';
 import Constants from '../../constants';
+import { useAuth } from '../../services';
+import { useCustomToast } from '../../utils';
 
 const SignIn = () => {
   const navigate = useNavigate();
-  // const {signIn} = useAuth();
+  const { signIn } = useAuth();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -22,13 +24,17 @@ const SignIn = () => {
     });
   };
 
+  const { showToastError } = useCustomToast();
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      // const res = await signIn(form);
-      // localStorage.setItem('accessToken', res.token)
-      // navigate('/admin/dashboard', {replace:true})
-    } catch (e) {}
+      const res = await signIn(form);
+      localStorage.setItem('accessToken', res.token);
+      console.log(res.token);
+      navigate('/admin/dashboard', { replace: true });
+    } catch (e) {
+      showToastError(e.message);
+    }
     setIsLoading(false);
   };
   return (
@@ -69,7 +75,7 @@ const SignIn = () => {
         <Button
           text="Submit"
           isLoading={isLoading}
-          onCLick={handleSubmit}
+          onClick={handleSubmit}
           isBggradient
         />
         <Center mt="40px">

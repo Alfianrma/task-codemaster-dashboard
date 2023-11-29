@@ -30,7 +30,7 @@ const Modal = ({
         {!withCloseIcon && (
           <ModalFooter>
             <Button
-              onCLick={onClose}
+              onClick={onClose}
               text="Cancel"
               bgColor="white"
               textColor="gray.700"
@@ -38,7 +38,7 @@ const Modal = ({
             />
             <Box width="8px" />
             <Button
-              onCLick={onConfirm}
+              onClick={onConfirm}
               text={confirmButtonText}
               isBggradient
               isLoading={isButtonLoading}
