@@ -13,7 +13,7 @@ import {
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Pagination from '../../components/Pagination';
-import { useCustomToast } from '../../utils';
+import { priceFormatter, useCustomToast } from '../../utils';
 import { useCourse } from '../../services';
 import { BiShow } from 'react-icons/bi';
 import ModalCourseDetails from '../../components/ModalCourseDetail';
@@ -60,11 +60,11 @@ const Course = () => {
           <Thead>
             <Tr>
               <Th>Name</Th>
-              <Th>Languange</Th>
-              <Th>Course Duration</Th>
+              <Th>Code</Th>
+              <Th>Credits</Th>
               <Th>Location</Th>
               <Th>Bootcamp Mentor</Th>
-              <Th>Mentor Email</Th>
+              <Th>Fee</Th>
               <Th></Th>
             </Tr>
           </Thead>
@@ -78,7 +78,7 @@ const Course = () => {
                   {item?.code}
                 </Td>
                 <Td fontSize="14px" color="gray.900">
-                  {item?.department}
+                  {item?.credits}
                 </Td>
                 <Td fontSize="14px" color="gray.900">
                   {item?.location}
@@ -87,7 +87,7 @@ const Course = () => {
                   {item?.instructor}
                 </Td>
                 <Td fontSize="14px" color="gray.900">
-                  {item?.fee}
+                  {priceFormatter(item?.fee)}
                 </Td>
                 <Td>
                   <IconButton

@@ -17,7 +17,11 @@ export default () => {
 
   const addStudents = async body => {
     try {
-      const response = await services.post('students', body);
+      const response = await services.post('students', body, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return response;
     } catch (error) {
       throw error.response?.data?.message;

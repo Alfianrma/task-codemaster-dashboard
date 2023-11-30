@@ -5,6 +5,7 @@ import FormInput from './FormInput';
 import Modal from './Modal';
 import { useCustomToast } from '../utils';
 import { useStudent } from '../services';
+import { Form } from 'react-router-dom';
 
 const initialState = {
   name: '',
@@ -19,6 +20,7 @@ const ModalFormStudent = ({ data, onClose, isOpen, refresh }) => {
   const { addStudents, updateStudent } = useStudent();
   const [form, setForm] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     if (data) {
@@ -29,19 +31,28 @@ const ModalFormStudent = ({ data, onClose, isOpen, refresh }) => {
   }, [isOpen]);
 
   const handleChange = e => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === 'image') {
+      setForm({
+        ...form,
+        image: e.target.files[0],
+      });
+    } else {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleAdd = async () => {
     setIsLoading(true);
     try {
-      const res = await addStudents({
-        ...form,
-        admissionDate: dayjs(form.admissionDate).format('YYYY-MM-DD'),
+      const formData = new FormData();
+      Object.entries(form).forEach(([key, value]) => {
+        formData.append(key, value);
       });
+
+      const res = await addStudents(formData);
       showToastSuccess(res?.message);
       onClose();
       refresh();
@@ -54,10 +65,18 @@ const ModalFormStudent = ({ data, onClose, isOpen, refresh }) => {
   const handleUpdate = async () => {
     setIsLoading(true);
     try {
-      const res = await updateStudent(data?.id, {
-        ...form,
-        admissionDate: dayjs(form.admissionDate).format('YYYY-MM-DD'),
-      });
+      const formData = new FormData();
+      formData.append('name', form.name);
+      formData.append('email', form.email);
+      formData.append('phoneNumber', form.phoneNumber);
+      formData.append('enrollNumber', form.enrollNumber);
+      formData.append(
+        'admissionDate',
+        dayjs(form.admissionDate).format('YYYY-MM-DD')
+      );
+      formData.append('image', selectedImage);
+
+      const res = await updateStudent(data?.id, formData);
       showToastSuccess(res?.message);
       onClose();
       refresh();
@@ -113,9 +132,20 @@ const ModalFormStudent = ({ data, onClose, isOpen, refresh }) => {
           placeholder="Enter your admission date"
           type="date"
         />
+        <FormInput
+          type={'file'}
+          name={'image'}
+          onChange={handleChange}
+          accept={'image/*'}
+        />
       </Flex>
     </Modal>
   );
 };
+
+//       </Flex>
+//     </Modal>
+//   );
+// };
 
 export default ModalFormStudent;

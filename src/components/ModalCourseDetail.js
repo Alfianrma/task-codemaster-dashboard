@@ -1,3 +1,4 @@
+import { priceFormatter } from '../utils';
 import Modal from './Modal';
 import { Flex, Text } from '@chakra-ui/react';
 
@@ -20,7 +21,7 @@ const ModalCourseDetails = ({ data, isOpen, onClose }) => {
         </Flex>
         <Flex direction="row" gap="10px" justifyContent="space-between">
           <Text fontSize="14px" color="gray.500">
-            Programming Languange
+            Code
           </Text>
           <Text fontSize="14px" color="black">
             {data?.code}
@@ -28,10 +29,10 @@ const ModalCourseDetails = ({ data, isOpen, onClose }) => {
         </Flex>
         <Flex direction="row" gap="10px" justifyContent="space-between">
           <Text fontSize="14px" color="gray.500">
-            Course Duration
+            Credits
           </Text>
           <Text fontSize="14px" color="black">
-            {data?.department}
+            {data?.credits}
           </Text>
         </Flex>
         <Flex direction="row" gap="10px" justifyContent="space-between">
@@ -52,10 +53,10 @@ const ModalCourseDetails = ({ data, isOpen, onClose }) => {
         </Flex>
         <Flex direction="row" gap="10px" justifyContent="space-between">
           <Text fontSize="14px" color="gray.500">
-            Mentor Email
+            Fee
           </Text>
           <Text fontSize="14px" color="black">
-            {data?.fee}
+            {priceFormatter(data?.fee)}
           </Text>
         </Flex>
       </Flex>

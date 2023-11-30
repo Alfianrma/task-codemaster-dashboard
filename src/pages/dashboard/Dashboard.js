@@ -4,6 +4,7 @@ import { FiUser, FiUsers } from 'react-icons/fi';
 import { BiBook, BiDollar } from 'react-icons/bi';
 import { useStatistics } from '../../services';
 import { useCustomToast } from '../../utils';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const { statistics } = useStatistics();
@@ -26,52 +27,58 @@ const Dashboard = () => {
     <Box px="3%" py="15%">
       <Flex direction="row" gap="2%">
         <Box w="50%" bg="blue.50" p="2%" borderRadius="10px">
-          <Flex direction="column">
-            <Icon as={FiUsers} w={7} h={7} color="blue.500" mb="5px" />
-            <Text color="blue.500" fontWeight="bold">
-              Students
-            </Text>
-            <Text
-              color="black"
-              fontWeight="bold"
-              alignSelf="end"
-              fontSize="30px"
-            >
-              {data?.students}
-            </Text>
-          </Flex>
+          <Link to="/admin/students">
+            <Flex direction="column">
+              <Icon as={FiUsers} w={7} h={7} color="blue.500" mb="5px" />
+              <Text color="blue.500" fontWeight="bold">
+                Students
+              </Text>
+              <Text
+                color="black"
+                fontWeight="bold"
+                alignSelf="end"
+                fontSize="30px"
+              >
+                {data?.students}
+              </Text>
+            </Flex>
+          </Link>
         </Box>
         <Box w="50%" bg="pink.50" p="2%" borderRadius="10px">
-          <Flex direction="column">
-            <Icon as={BiBook} w={7} h={7} color="pink.500" mb="5px" />
-            <Text color="pink.500" fontWeight="bold">
-              Course
-            </Text>
-            <Text
-              color="black"
-              fontWeight="bold"
-              alignSelf="end"
-              fontSize="30px"
-            >
-              {data?.courses}
-            </Text>
-          </Flex>
+          <Link to="/admin/course">
+            <Flex direction="column">
+              <Icon as={BiBook} w={7} h={7} color="pink.500" mb="5px" />
+              <Text color="pink.500" fontWeight="bold">
+                Course
+              </Text>
+              <Text
+                color="black"
+                fontWeight="bold"
+                alignSelf="end"
+                fontSize="30px"
+              >
+                {data?.courses}
+              </Text>
+            </Flex>
+          </Link>
         </Box>
         <Box w="50%" bg="#FFFAEB" p="2%" borderRadius="10px">
-          <Flex direction="column">
-            <Icon as={BiDollar} w={7} h={7} color="#B54708" mb="5px" />
-            <Text color="#B54708" fontWeight="bold">
-              Payments
-            </Text>
-            <Text
-              color="black"
-              fontWeight="bold"
-              alignSelf="end"
-              fontSize="30px"
-            >
-              {data?.payments}
-            </Text>
-          </Flex>
+          <Link to="/admin/payment">
+            <Flex direction="column">
+              <Icon as={BiDollar} w={7} h={7} color="#B54708" mb="5px" />
+              <Text color="#B54708" fontWeight="bold">
+                Payments
+              </Text>
+              <Text
+                color="black"
+                fontWeight="bold"
+                alignSelf="end"
+                fontSize="30px"
+              >
+                {data?.payments}
+              </Text>
+            </Flex>
+          </Link>
         </Box>
         <Box w="50%" bg="#F94449" p="2%" borderRadius="10px">
           <Flex direction="column">

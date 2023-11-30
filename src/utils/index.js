@@ -1,6 +1,6 @@
 export const priceFormatter = number => {
   if (!number) {
-    return 0;
+    return 'Rp 0';
   }
 
   var rupiah = '';
@@ -8,14 +8,17 @@ export const priceFormatter = number => {
 
   for (var i = 0; i < numberrev.length; i++) {
     if (i % 3 === 0) {
-      rupiah += numberrev.substr(i, 3) + ',';
+      rupiah += numberrev.substr(i, 3) + '.';
     }
   }
 
-  return rupiah
-    .split('', rupiah.length - 1)
-    .reverse()
-    .join('');
+  return (
+    'Rp ' +
+    rupiah
+      .split('', rupiah.length - 1)
+      .reverse()
+      .join('')
+  );
 };
 
 export { default as useCustomToast } from './useCustomToast';
